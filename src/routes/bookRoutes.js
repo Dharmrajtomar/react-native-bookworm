@@ -39,7 +39,7 @@ router.get("/", protectRoute, async (req, res)=>{
 
     try {
         const page =req.query.page || 1;
-        const limit =req.query.limit || 5;
+        const limit =req.query.limit || 50;
         const skip = (page-1) * limit;
 
         const books =await Book.find()
@@ -75,7 +75,7 @@ router.delete("/:id", protectRoute, async (req, res)=>{
 
         // check if user is the creator of the book
 
-        if(book.user.toString() !== req.user>_id.toString())
+        if(book.user.toString() !== req.user._id.toString())
             return res.status(401).json({message: " Unauthorized" });
 
         // delete image from cloduinary as well
