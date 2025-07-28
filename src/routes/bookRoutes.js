@@ -42,7 +42,8 @@ router.get("/", protectRoute, async (req, res)=>{
         const limit =req.query.limit || 50;
         const skip = (page-1) * limit;
 
-        const books =await Book.find()
+        // const books =await Book.find()
+        const books = await Book.find({ user: req.user._id })
         .sort({ createdAt: -1}) // desc
         .skip(skip)
         .limit(limit)
